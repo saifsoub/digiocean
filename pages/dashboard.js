@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Box, Button, Card, CardContent, Container, Grid, Stack, Typography } from "@mui/material";
 
 const tiles = [
@@ -8,6 +9,24 @@ const tiles = [
 ];
 
 export default function Dashboard() {
+  const [status, setStatus] = useState("");
+
+  const openBillingSession = async (endpoint) => {
+    try {
+      setStatus("");
+      const response = await fetch(endpoint, { method: "POST" });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Request failed");
+      if (payload.url) {
+        window.location.assign(payload.url);
+        return;
+      }
+      setStatus(payload.message || "Billing endpoint completed.");
+    } catch (error) {
+      setStatus(error.message || "Unable to complete billing action.");
+    }
+  };
+
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
       <Stack spacing={2} sx={{ mb: 3 }}>
@@ -33,13 +52,18 @@ export default function Dashboard() {
       </Grid>
 
       <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
-        <Button variant="contained" onClick={() => fetch("/api/stripe/checkout", { method: "POST" })}>
+        <Button variant="contained" onClick={() => openBillingSession("/api/stripe/checkout")}>
           Upgrade plan
         </Button>
-        <Button variant="outlined" onClick={() => fetch("/api/stripe/portal", { method: "POST" })}>
+        <Button variant="outlined" onClick={() => openBillingSession("/api/stripe/portal")}>
           Manage billing
         </Button>
       </Box>
+      {status ? (
+        <Typography color="text.secondary" sx={{ mt: 2 }}>
+          {status}
+        </Typography>
+      ) : null}
     </Container>
   );
 }

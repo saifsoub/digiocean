@@ -3,16 +3,24 @@ import { Alert, Button, Card, CardContent, Container, Stack, TextField, Typograp
 
 export default function ForgotPassword() {
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    await fetch("/api/reset-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: formData.get("email") }),
-    });
-    setSent(true);
+    try {
+      setSent(false);
+      setError("");
+      const response = await fetch("/api/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: formData.get("email") }),
+      });
+      if (!response.ok) throw new Error("Could not send reset email.");
+      setSent(true);
+    } catch (requestError) {
+      setError(requestError.message || "Could not send reset email.");
+    }
   };
 
   return (
@@ -29,6 +37,7 @@ export default function ForgotPassword() {
               Send reset link
             </Button>
             {sent && <Alert severity="success">If your account exists, a reset email has been sent.</Alert>}
+            {error && <Alert severity="error">{error}</Alert>}
           </Stack>
         </CardContent>
       </Card>
