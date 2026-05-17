@@ -1,8 +1,11 @@
+import { useState } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { Box, Button, Card, CardContent, Container, Stack, TextField, Typography } from "@mui/material";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -22,12 +25,12 @@ export default function Login() {
               Sign in
             </Typography>
             <Typography color="text.secondary">Use credentials or a magic link powered by NextAuth + Resend.</Typography>
-            <TextField name="email" type="email" label="Email" required />
+            <TextField name="email" type="email" label="Email" required value={email} onChange={(event) => setEmail(event.target.value)} />
             <TextField name="password" type="password" label="Password" required />
             <Button type="submit" variant="contained">
               Continue
             </Button>
-            <Button type="button" variant="outlined" onClick={() => signIn("email", { callbackUrl: "/dashboard" })}>
+            <Button type="button" variant="outlined" onClick={() => signIn("email", { email, callbackUrl: "/dashboard" })} disabled={!email}>
               Send magic link
             </Button>
             <Box>
