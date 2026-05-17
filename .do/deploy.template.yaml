@@ -1,10 +1,11 @@
 spec:
-  name: sample-nextjs
+  name: digitalocean-saas
   services:
   - environment_slug: node-js
     git:
       branch: main
-      repo_clone_url: https://github.com/digitalocean/sample-nextjs.git
+      repo_clone_url: https://github.com/your-org/your-repo.git
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-0.5gb
-    name: sample-nextjs
+    name: web
+    run_command: npm start

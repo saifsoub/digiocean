@@ -1,8 +1,11 @@
-name: sample-nextjs
+name: digitalocean-saas
 services:
 - environment_slug: node-js
   github:
     branch: main
     deploy_on_push: true
-    repo: digitalocean/sample-nextjs
-  name: sample-nextjs
+    repo: saifsoub/digiocean
+  name: web
+  instance_count: 1
+  instance_size_slug: apps-s-1vcpu-0.5gb
+  run_command: npm start
