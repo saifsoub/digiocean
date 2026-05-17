@@ -1,16 +1,11 @@
-import { Card, CardContent, Chip, Container, Grid, Stack, Typography } from "@mui/material";
+import { Card, CardContent, Chip, Grid, Stack, Typography } from "@mui/material";
+import AppShell from "../components/AppShell";
 
 const integrations = ["OpenAI", "Anthropic", "Google", "DigitalOcean GradientAI", "Custom API"];
 
 export default function Agents() {
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
-      <Stack spacing={2} sx={{ mb: 3 }}>
-        <Typography variant="h3" sx={{ fontWeight: 700 }}>
-          Agents control room
-        </Typography>
-        <Typography color="text.secondary">Import, configure, and orchestrate agents from supported platforms.</Typography>
-      </Stack>
+    <AppShell title="Agents control room" subtitle="Import, configure, and orchestrate agents from supported platforms.">
       <Grid container spacing={2}>
         {integrations.map((integration) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={integration}>
@@ -25,6 +20,6 @@ export default function Agents() {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </AppShell>
   );
 }

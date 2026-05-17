@@ -1,4 +1,5 @@
-import { Card, CardContent, Container, Grid, Stack, Typography } from "@mui/material";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
+import AppShell from "../components/AppShell";
 
 const cards = [
   "Review customer accounts and role assignments",
@@ -9,13 +10,7 @@ const cards = [
 
 export default function Admin() {
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
-      <Stack spacing={2} sx={{ mb: 3 }}>
-        <Typography variant="h3" sx={{ fontWeight: 700 }}>
-          Admin dashboard
-        </Typography>
-        <Typography color="text.secondary">Centralized controls for users, subscriptions, and security operations.</Typography>
-      </Stack>
+    <AppShell title="Admin dashboard" subtitle="Centralized controls for users, subscriptions, and security operations.">
       <Grid container spacing={2}>
         {cards.map((card) => (
           <Grid size={{ xs: 12, md: 6 }} key={card}>
@@ -27,6 +22,6 @@ export default function Admin() {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </AppShell>
   );
 }

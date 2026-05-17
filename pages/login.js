@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { Box, Button, Card, CardContent, Container, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Stack, TextField } from "@mui/material";
+import AppShell from "../components/AppShell";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -17,14 +18,10 @@ export default function Login() {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ py: 10 }}>
+    <AppShell maxWidth="sm" title="Sign in" subtitle="Use credentials or a magic link powered by NextAuth + Resend.">
       <Card sx={{ borderRadius: 3 }}>
         <CardContent>
           <Stack spacing={2} component="form" onSubmit={handleSubmit}>
-            <Typography variant="h4" sx={{ fontWeight: 700 }}>
-              Sign in
-            </Typography>
-            <Typography color="text.secondary">Use credentials or a magic link powered by NextAuth + Resend.</Typography>
             <TextField name="email" type="email" label="Email" required value={email} onChange={(event) => setEmail(event.target.value)} />
             <TextField name="password" type="password" label="Password" required />
             <Button type="submit" variant="contained">
@@ -39,6 +36,6 @@ export default function Login() {
           </Stack>
         </CardContent>
       </Card>
-    </Container>
+    </AppShell>
   );
 }

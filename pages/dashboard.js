@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Box, Button, Card, CardContent, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import AppShell from "../components/AppShell";
 
 const tiles = [
   { title: "Current plan", value: "Pro Annual" },
@@ -28,14 +29,7 @@ export default function Dashboard() {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
-      <Stack spacing={2} sx={{ mb: 3 }}>
-        <Typography variant="h3" sx={{ fontWeight: 700 }}>
-          Customer dashboard
-        </Typography>
-        <Typography color="text.secondary">Manage subscriptions, invoices, uploads, and AI usage in one place.</Typography>
-      </Stack>
-
+    <AppShell title="Customer dashboard" subtitle="Manage subscriptions, invoices, uploads, and AI usage in one place.">
       <Grid container spacing={2}>
         {tiles.map((tile) => (
           <Grid size={{ xs: 12, sm: 6, md: 3 }} key={tile.title}>
@@ -64,6 +58,6 @@ export default function Dashboard() {
           {status}
         </Typography>
       ) : null}
-    </Container>
+    </AppShell>
   );
 }

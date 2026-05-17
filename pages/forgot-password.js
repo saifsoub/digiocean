@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Alert, Button, Card, CardContent, Container, Stack, TextField, Typography } from "@mui/material";
+import { Alert, Button, Card, CardContent, Stack, TextField } from "@mui/material";
+import AppShell from "../components/AppShell";
 
 export default function ForgotPassword() {
   const [sent, setSent] = useState(false);
@@ -24,14 +25,10 @@ export default function ForgotPassword() {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ py: 10 }}>
+    <AppShell maxWidth="sm" title="Reset password" subtitle="We&apos;ll send a secure reset link to your email.">
       <Card sx={{ borderRadius: 3 }}>
         <CardContent>
           <Stack spacing={2} component="form" onSubmit={handleSubmit}>
-            <Typography variant="h4" sx={{ fontWeight: 700 }}>
-              Reset password
-            </Typography>
-            <Typography color="text.secondary">We&apos;ll send a secure reset link to your email.</Typography>
             <TextField name="email" type="email" label="Email" required />
             <Button type="submit" variant="contained">
               Send reset link
@@ -41,6 +38,6 @@ export default function ForgotPassword() {
           </Stack>
         </CardContent>
       </Card>
-    </Container>
+    </AppShell>
   );
 }
