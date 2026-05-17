@@ -39,7 +39,7 @@ export default function Home() {
       <AppBar position="static" elevation={0} color="transparent">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            Digiocean SaaS Starter
+            DigitalOcean SaaS Starter
           </Typography>
           <Button LinkComponent={Link} href="/login" variant="contained">
             Launch App

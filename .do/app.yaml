@@ -1,4 +1,4 @@
-name: digiocean-saas
+name: digitalocean-saas
 services:
 - environment_slug: node-js
   github:

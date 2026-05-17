@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     await resend.emails.send({
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: "Reset your Digiocean password",
+      subject: "Reset your DigitalOcean password",
       html: `<p>Reset your password using this link:</p><p><a href="${resetUrl}">${resetUrl}</a></p>`,
     });
   }

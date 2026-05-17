@@ -1,4 +1,4 @@
-# Digiocean SaaS Starter
+# DigitalOcean SaaS Starter
 
 A production-focused Next.js SaaS starter with:
 
