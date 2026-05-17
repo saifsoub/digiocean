@@ -1,53 +1,103 @@
-import Image from 'next/image'
+import Link from "next/link";
+import {
+  AppBar,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  Container,
+  Grid,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+
+const features = [
+  "Built-in login/auth with NextAuth",
+  "Forgot password + magic link login",
+  "Email notifications via Resend with PDF invoice attachments",
+  "Stripe billing (upgrade/cancel plan)",
+  "File uploads to DigitalOcean Spaces",
+  "PostgreSQL via Prisma ORM",
+  "DigitalOcean GradientAI Serverless Inference API",
+  "Admin dashboard for users and subscriptions",
+  "Agents control room with multi-platform imports",
+  "One-click deploy to DigitalOcean App Platform",
+];
+
+const sections = [
+  { title: "Auth", href: "/login", description: "Secure sign-in, magic links, and password reset." },
+  { title: "Customer Dashboard", href: "/dashboard", description: "Usage, plan details, invoices, and settings." },
+  { title: "Admin Console", href: "/admin", description: "Manage users, subscriptions, and feature access." },
+  { title: "Agents Control Room", href: "/agents", description: "Import and orchestrate agents from connected platforms." },
+];
 
 export default function Home() {
   return (
-    <div className="min-h-screen lg:flex text-lg">
-      {/* left side */}
-      <div className="lg:w-1/2 relative z-10 flex flex-col justify-center px-10 lg:px-20 py-20 lg:py-0 text-left">
-        <h2 className="inter text-4xl mb-3 font-bold text-gray-800">
-          Welcome to Your Next.js App{" "}
-          <span className="block text-blue-500 text-2xl font-normal">
-            Deployed to DigitalOcean
-          </span>
-        </h2>
+    <Box sx={{ bgcolor: "#f6f9ff", minHeight: "100vh" }}>
+      <AppBar position="static" elevation={0} color="transparent">
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
+            Digiocean SaaS Starter
+          </Typography>
+          <Button LinkComponent={Link} href="/login" variant="contained">
+            Launch App
+          </Button>
+        </Toolbar>
+      </AppBar>
 
-        <p className="text-gray-700 mb-6">
-          Deploy API routes, static frontend, databases, and more.
-        </p>
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Stack spacing={3} alignItems="flex-start">
+          <Chip label="Production-ready Next.js SaaS template" color="primary" />
+          <Typography variant="h2" sx={{ fontWeight: 800, maxWidth: 900 }}>
+            Build and deploy a full SaaS platform on DigitalOcean with best-practice integrations.
+          </Typography>
+          <Typography color="text.secondary" sx={{ maxWidth: 800 }}>
+            This starter includes complete architecture foundations for authentication, billing, email, uploads, AI inference, and admin workflows.
+          </Typography>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+            <Button LinkComponent={Link} href="/dashboard" variant="contained" size="large">
+              View Product UI
+            </Button>
+            <Button LinkComponent={Link} href="/admin" variant="outlined" size="large">
+              Open Admin Console
+            </Button>
+          </Stack>
+        </Stack>
 
-        <div className="sm:flex">
-          <a
-            href="https://www.digitalocean.com/docs/app-platform"
-            className="block py-2 px-5 rounded shadow bg-gray-500 text-gray-100 sm:mr-2 mb-2 sm:mb-0"
-          >
-            View the Docs
-          </a>
-          <a
-            href="https://cloud.digitalocean.com/apps"
-            className="block py-2 px-5 rounded shadow bg-blue-500 text-blue-100"
-          >
-            View Your Dashboard
-          </a>
-        </div>
-      </div>
+        <Grid container spacing={2} sx={{ mt: 5 }}>
+          {features.map((feature) => (
+            <Grid size={{ xs: 12, md: 6 }} key={feature}>
+              <Card variant="outlined" sx={{ borderRadius: 3 }}>
+                <CardContent>
+                  <Typography variant="body1">{feature}</Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
 
-      {/* right side */}
-      <div className="lg:w-1/2 relative">
-        <svg
-          className="hidden lg:block text-white fill-current absolute h-full transform -translate-x-1/2 w-48 z-10"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <polygon points="50,0 100,0 50,100 0,100"></polygon>
-        </svg>
-
-        <Image
-          src="background.jpg"
-          alt="Ocean Image"
-          className="lg:absolute object-cover lg:inset-y-0 lg:right-0 lg:h-full lg:w-full"
-        />
-      </div>
-    </div>
+        <Grid container spacing={2} sx={{ mt: 2 }}>
+          {sections.map((section) => (
+            <Grid size={{ xs: 12, md: 6 }} key={section.title}>
+              <Card sx={{ borderRadius: 3 }}>
+                <CardContent>
+                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 700 }}>
+                    {section.title}
+                  </Typography>
+                  <Typography color="text.secondary" sx={{ mb: 2 }}>
+                    {section.description}
+                  </Typography>
+                  <Button LinkComponent={Link} href={section.href} variant="text">
+                    Open {section.title}
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </Box>
   );
 }
